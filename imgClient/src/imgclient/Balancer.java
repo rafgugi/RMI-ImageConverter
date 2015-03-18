@@ -5,6 +5,8 @@
  */
 package imgclient;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +15,32 @@ import java.util.ArrayList;
  */
 public class Balancer {
     
-    public ArrayList<Process> processes;
+    public ArrayList<Processor> processors;
     
-    public Balancer(ArrayList<Process> processes) {
-        this.processes = processes;
+    public Balancer(ArrayList<Processor> processors) {
+        this.processors = processors;
+    }
+
+    public void loop() {
+        FileFilter ff;
+        ff = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                String name = file.getName();
+                String extension = Helper.getExtension(file);
+                return ("png".equals(extension) || "jpg".equals(extension));
+            }
+        };
+        
+        int size = processors.size();
+
+        File srcFolder = new File(Helper.FOLDER_SRC);
+        int i = 0;
+        for (final File file : srcFolder.listFiles(ff)) {
+            Process p = new Process(processors.get(i%size), file);
+            p.run();
+            i++;
+        }
     }
 
 }
