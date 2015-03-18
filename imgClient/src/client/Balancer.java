@@ -38,7 +38,7 @@ public class Balancer {
         int i = 0;
         for (final File file : srcFolder.listFiles(ff)) {
             Process p = new Process(processors.get(i%size), file);
-            p.run();
+            p.start();
             i++;
         }
     }

@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  *
  * @author sg
  */
-public class Process implements Runnable {
+public class Process extends Thread implements Runnable {
 
     public Processor processor;
     private final File file;

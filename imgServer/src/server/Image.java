@@ -28,6 +28,7 @@ public class Image extends UnicastRemoteObject implements ImageInterface {
 
     @Override
     public byte[] toGrayscale(byte[] src) throws RemoteException {
+        System.out.print(".");
         try {
             InputStream in = new ByteArrayInputStream(src);
             BufferedImage image = ImageIO.read(in);
