@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package imgserver;
+package server;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class ImgServer {
+public class MainServer {
 
     private void startServer() {
         try {
@@ -24,7 +24,7 @@ public class ImgServer {
     }
 
     public static void main(String[] args) {
-        ImgServer main = new ImgServer();
+        MainServer main = new MainServer();
         main.startServer();
     }
 }

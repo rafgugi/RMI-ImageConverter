@@ -1,4 +1,4 @@
-package imgclient;
+package client;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +12,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import rmi.ImageInterface;
 
-public class ImgClient {
+public class MainClient {
 
     public static void main(String[] args) {
         ArrayList<Processor> processors = new ArrayList<>();
