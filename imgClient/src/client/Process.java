@@ -25,6 +25,10 @@ public class Process extends Thread implements Runnable {
     public Process(Processor processor, File file) {
         this.processor = processor;
         this.file = file;
+        if (!processor.isReady) {
+            System.out.println("Overlap!");
+        }
+        processor.isReady = false;
     }
 
     @Override
@@ -48,9 +52,10 @@ public class Process extends Thread implements Runnable {
             InputStream in = new ByteArrayInputStream(dstBytes);
             BufferedImage dstBuff = ImageIO.read(in);
             ImageIO.write(dstBuff, fileExt, new File(Helper.FOLDER_DST + fileName));
-        } catch (IOException ex) {
+        } catch (IOException | NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
+        processor.isReady = true;
     }
 
 }

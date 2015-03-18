@@ -19,8 +19,10 @@ public class Processor {
 
     private Registry registry;
     private ImageInterface image;
+    public boolean isReady;
 
     public Processor(String server, int port) {
+        isReady = true;
         try {
             registry = LocateRegistry.getRegistry(server, port);
             image = (ImageInterface) registry.lookup("Image");

@@ -15,7 +15,7 @@ public class MainServer {
             /*
              * register server in port 5000 and bind as service named "Echo"
              */
-            Registry registry = LocateRegistry.createRegistry(5000);
+            Registry registry = LocateRegistry.createRegistry(22001);
             registry.rebind("Image", new Image());
         } catch (Exception e) {
             System.out.println(e.getMessage());
