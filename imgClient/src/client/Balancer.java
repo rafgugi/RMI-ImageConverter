@@ -22,20 +22,9 @@ public class Balancer {
     }
 
     public void loop() {
-        FileFilter ff;
-        ff = new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                String extension = Helper.getExtension(file);
-                return ("png".equals(extension) || "jpg".equals(extension));
-            }
-        };
-
-        int size = processors.size();
-
         File srcFolder = new File(Helper.FOLDER_SRC);
         int i = 0;
-        for (final File file : srcFolder.listFiles(ff)) {
+        for (final File file : srcFolder.listFiles(Helper.imageFilter)) {
             boolean temp = true;
             while (temp) {
                 for (Processor proc : processors) {

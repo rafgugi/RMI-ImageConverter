@@ -6,6 +6,7 @@
 package client;
 
 import java.io.File;
+import java.io.FileFilter;
 
 /**
  *
@@ -24,4 +25,12 @@ public class Helper {
         }
         return extension;
     }
+
+    public static final FileFilter imageFilter = new FileFilter() {
+        @Override
+        public boolean accept(File file) {
+            String ext = getExtension(file);
+            return ("png".equals(ext) || "jpg".equals(ext));
+        }
+    };
 }
