@@ -1,5 +1,9 @@
 # RMI-ImageConverter
 Convert images to grayscale using multi-server RMI.
 
-Open all project using Java IDE. If you want to use more than one server,
-add the server name and port into `ArrayList` in the `imgClient/src/client/MainClient.java`.
+## Install
+Open all project using Java IDE.
+
+## Config
+- If you want to use more than one server, add the server name and port into `ArrayList` in the `imgClient/src/client/MainClient.java`.
+- Image directory source and destination located in `imgClient/src/client/Helper.java`

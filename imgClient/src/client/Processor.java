@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package client;
 
 import java.rmi.NotBoundException;
@@ -19,19 +24,15 @@ public class Processor {
     private int port;
 
     public Processor(String server, int port) {
-        isReady = false;
+        isReady = true;
         this.server = server;
         this.port = port;
         try {
             registry = LocateRegistry.getRegistry(server, port);
             image = (ImageInterface) registry.lookup("Image");
-            isReady = true;
         } catch (RemoteException | NotBoundException ex) {
             System.out.println("Processor: " + this + "> " + ex.getMessage());
-<<<<<<< HEAD
-=======
             isReady = false;
->>>>>>> mboh kah udah selesai
         }
     }
 
