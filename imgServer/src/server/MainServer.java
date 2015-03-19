@@ -7,12 +7,15 @@ public class MainServer {
 
     private void startServer() {
         try {
-            Registry registry = LocateRegistry.createRegistry(22001);
+            /*
+             * register server in port 5000 and bind as service named "Echo"
+             */
+            Registry registry = LocateRegistry.createRegistry(22003);
             registry.rebind("Image", new Image());
-            System.out.println("Server is ready");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Server is ready");
     }
 
     public static void main(String[] args) {

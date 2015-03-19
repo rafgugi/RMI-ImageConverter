@@ -30,6 +30,12 @@ public class Process extends Thread implements Runnable {
 
     @Override
     public void run() {
+<<<<<<< HEAD
+=======
+        String fileName = file.getName();
+        String fileExt = Helper.getExtension(file);
+        Date date = new Date();
+>>>>>>> mboh kah udah selesai
         try {
             String msg = "";
             String fileName = file.getName();
@@ -53,10 +59,19 @@ public class Process extends Thread implements Runnable {
             ImageIO.write(dstBuff, fileExt, new File(Helper.FOLDER_DST + fileName));
 
             long diff = new Date().getTime() - date.getTime();
+<<<<<<< HEAD
             msg += " (time: " + Helper.etaConvert(diff) + ")";
             System.out.println(msg);
         } catch (IOException | NullPointerException ex) {
             System.out.println("Process: " + processor + "> " + Arrays.toString(ex.getStackTrace()));
+=======
+            String msg = "";
+            msg += processor + "> Processing " + fileName;
+            msg += " (time: " + Helper.etaConvert(diff) + ")";
+            System.out.println(msg);
+        } catch (IOException | NullPointerException ex) {
+            System.out.println("Process: " + processor + "> " + ex.getMessage());
+>>>>>>> mboh kah udah selesai
         }
         processor.isReady = true;
     }

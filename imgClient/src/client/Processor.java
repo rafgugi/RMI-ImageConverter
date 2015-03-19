@@ -28,6 +28,10 @@ public class Processor {
             isReady = true;
         } catch (RemoteException | NotBoundException ex) {
             System.out.println("Processor: " + this + "> " + ex.getMessage());
+<<<<<<< HEAD
+=======
+            isReady = false;
+>>>>>>> mboh kah udah selesai
         }
     }
 
