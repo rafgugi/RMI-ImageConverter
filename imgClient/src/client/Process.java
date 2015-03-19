@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import javax.imageio.ImageIO;
 
 /**
@@ -33,11 +34,12 @@ public class Process extends Thread implements Runnable {
 
     @Override
     public void run() {
+        String msg = "";
+        String fileName = file.getName();
+        String fileExt = Helper.getExtension(file);
+        msg += processor + "> Processing " + fileName;
+        Date date = new Date();
         try {
-            String fileName = file.getName();
-            String fileExt = Helper.getExtension(file);
-            System.out.println(fileName);
-
             BufferedImage srcBuff = ImageIO.read(file);
             ByteArrayOutputStream bos;
             bos = new ByteArrayOutputStream();
@@ -53,8 +55,11 @@ public class Process extends Thread implements Runnable {
             BufferedImage dstBuff = ImageIO.read(in);
             ImageIO.write(dstBuff, fileExt, new File(Helper.FOLDER_DST + fileName));
         } catch (IOException | NullPointerException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println(processor + ": " + ex.getMessage());
         }
+        long diff = new Date().getTime() - date.getTime();
+        msg += " (time: " + Helper.etaConvert(diff) + ")";
+        System.out.println(msg);
         processor.isReady = true;
     }
 
