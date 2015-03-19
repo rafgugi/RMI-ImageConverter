@@ -19,15 +19,15 @@ public class Processor {
     private int port;
 
     public Processor(String server, int port) {
-        isReady = true;
+        isReady = false;
         this.server = server;
         this.port = port;
         try {
             registry = LocateRegistry.getRegistry(server, port);
             image = (ImageInterface) registry.lookup("Image");
+            isReady = true;
         } catch (RemoteException | NotBoundException ex) {
-            System.out.println(this + "> " + ex.getMessage());
-            isReady = false;
+            System.out.println("Processor: " + this + "> " + ex.getMessage());
         }
     }
 

@@ -29,12 +29,13 @@ public class Process extends Thread implements Runnable {
 
     @Override
     public void run() {
-        String msg = "";
-        String fileName = file.getName();
-        String fileExt = Helper.getExtension(file);
-        msg += processor + "> Processing " + fileName;
-        Date date = new Date();
         try {
+            String msg = "";
+            String fileName = file.getName();
+            String fileExt = Helper.getExtension(file);
+            msg += processor + "> Processing " + fileName;
+            Date date = new Date();
+
             BufferedImage srcBuff = ImageIO.read(file);
             ByteArrayOutputStream bos;
             bos = new ByteArrayOutputStream();
@@ -49,12 +50,13 @@ public class Process extends Thread implements Runnable {
             InputStream in = new ByteArrayInputStream(dstBytes);
             BufferedImage dstBuff = ImageIO.read(in);
             ImageIO.write(dstBuff, fileExt, new File(Helper.FOLDER_DST + fileName));
+
+            long diff = new Date().getTime() - date.getTime();
+            msg += " (time: " + Helper.etaConvert(diff) + ")";
+            System.out.println(msg);
         } catch (IOException | NullPointerException ex) {
-            System.out.println(processor + ": " + ex.getMessage());
+            System.out.println("Process: " + processor + "> " + ex.getMessage());
         }
-        long diff = new Date().getTime() - date.getTime();
-        msg += " (time: " + Helper.etaConvert(diff) + ")";
-        System.out.println(msg);
         processor.isReady = true;
     }
 
