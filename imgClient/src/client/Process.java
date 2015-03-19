@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Date;
 import javax.imageio.ImageIO;
 
@@ -55,7 +56,7 @@ public class Process extends Thread implements Runnable {
             msg += " (time: " + Helper.etaConvert(diff) + ")";
             System.out.println(msg);
         } catch (IOException | NullPointerException ex) {
-            System.out.println("Process: " + processor + "> " + ex.getMessage());
+            System.out.println("Process: " + processor + "> " + Arrays.toString(ex.getStackTrace()));
         }
         processor.isReady = true;
     }
