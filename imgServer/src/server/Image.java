@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import rmi.ImageInterface;
 
@@ -28,23 +29,27 @@ public class Image extends UnicastRemoteObject implements ImageInterface {
 
     @Override
     public byte[] toGrayscale(byte[] src) throws RemoteException {
-        System.out.print(".");
+        System.out.print("Diff: ");
+        Date start = new Date();
+        
+        byte[] ans = null;
         try {
             InputStream in = new ByteArrayInputStream(src);
             BufferedImage image = ImageIO.read(in);
-            byte[] imageByte;
+
             ColorConvertOp colorConvert = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
             colorConvert.filter(image, image);
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", bos);
             bos.flush();
-            imageByte = bos.toByteArray();
-            return imageByte;
+            ans = bos.toByteArray();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        return null;
+        long time = new Date().getTime() - start.getTime();
+        System.out.println(time/1000);
+        return ans;
     }
 
 }
