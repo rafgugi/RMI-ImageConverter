@@ -13,3 +13,5 @@ hs_err_pid*
 /imgServer/build/
 /imgStub/build/
 /imgClient/build/
+/imgStub/dist/
+/imgServer/dist/
